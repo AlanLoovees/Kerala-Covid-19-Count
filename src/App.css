@@ -1,13 +1,56 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700&display=swap');
+
+@media only screen and (max-width: 768px) {
+  .web-title {
+    font-size: 3rem;
+  }
+
+  .updated {
+    font-size: 1.4rem;
+  }
 }
 
-.count {
+@media only screen and (min-width: 768px) {
+  .web-title {
+    font-size: 4rem;
+  }
+
+  .updated {
+    font-size: 1.4rem;
+  }
+}
+
+.App {
+  font-family: 'Raleway', sans-serif;
+}
+
+.web-title {
+  margin: 2rem;
+  /* font-size: 4rem; */
+  color: #2c3e50;
+}
+
+.card-title {
+  font-size: 1.8rem!important;
+  font-weight: 500!important;
+}
+
+.confirmed {
+  background-color: #34495e;
   font-size: 1.6rem;
-  color: green;
+  color: white;
+  text-align: center;
 }
 
 .state-count {
   font-size: 1.4rem;
   margin-top: 0.4rem;
+  text-align: center;
+  color: white;
+}
+
+.updated {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1rem;
 }
