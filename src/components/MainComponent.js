@@ -60,6 +60,7 @@ class Main extends React.Component {
                         <RenderDistrict districtCount={this.state.districtCount}/>
                     </div>
                 </div>
+                <h4>Last Updated:{" "}{JSON.stringify(this.state.stateCount? this.state.stateCount.lastupdatedtime: 0)}</h4>
             </div>
         );
     }
