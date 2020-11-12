@@ -4,20 +4,35 @@ import { Card } from 'react-materialize';
 
 function RenderDistrict({ districtCount }) {
     if(districtCount != null) {
-        var colors = ['#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6', '#8e44ad', '#f1c40f', '#f39c12', '#e67e22', '#d35400', '#e74c3c', '#c0392b'];
         var districts = ['ALP', 'EKM', 'IDK', 'KNR', 'KGD', 'KLM', 'KTM', 'KZD', 'MLP', 'PKD', 'PTM', 'TVM', 'TSR', 'WYD']
-        var i = 0;
+        var i = 0, color = '#27ae60';
         return Object.keys(districtCount).map((district) => {
             if (district === "Other State") return null;
             else {
+                var delta = districtCount[district].delta.confirmed;
+                if (delta>900) {
+                    color = '#c0392b';
+                }
+                else if (delta>600) {
+                    color = '#d35400';
+                }
+                else if (delta>250) {
+                    color = '#f39c12';
+                }
+                else if (delta>100) {
+                    color = '#f1c40f';
+                }
+                else {
+                    color = '#27ae60';
+                }
                 return (
                     <div className="col s12 m6 l2" key={district}>
                         <Card
                             className="state-count"
-                            style={{ backgroundColor: colors[i] }}
+                            style={{ backgroundColor: color }}
                         >
                             <div className="card-title">{districts[i++]}</div>
-                            <div>{districtCount[district].delta.confirmed}</div>
+                            <div>{delta}</div>
                         </Card>
                     </div>
                 );
