@@ -59,7 +59,7 @@ class Main extends React.Component {
 
         fetch("https://api.covid19india.org/data.json")
         .then(response => response.json())
-        .then(data => this.setState({ stateCount: data.statewise[6] }));
+        .then(data => this.setState({ stateCount: data.statewise[5] }));
 
         fetch("https://api.covid19india.org/state_district_wise.json")
         .then(res => res.json())
