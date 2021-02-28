@@ -57,13 +57,13 @@ class Main extends React.Component {
 
     componentDidMount() {
 
-        fetch("https://api.covid19india.org/data.json")
+        fetch("https://kcc-server.herokuapp.com/fetchStateWise")
         .then(response => response.json())
-        .then(data => this.setState({ stateCount: data.statewise[5] }));
+        .then(data => this.setState({ stateCount: data }));
 
-        fetch("https://api.covid19india.org/state_district_wise.json")
+        fetch("https://kcc-server.herokuapp.com/fetchDistrictWise")
         .then(res => res.json())
-        .then(data => this.setState({ districtCount: data.Kerala.districtData}));
+        .then(data => this.setState({ districtCount: data}));
     }
 
     render() {
