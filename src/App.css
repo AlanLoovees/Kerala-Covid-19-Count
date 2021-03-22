@@ -20,13 +20,16 @@
   }
 }
 
+.row .col {
+  padding: 0!important;
+}
+
 .App {
   font-family: 'Raleway', sans-serif;
 }
 
 .web-title {
   margin: 2rem;
-  /* font-size: 4rem; */
   color: #2c3e50;
 }
 
@@ -36,10 +39,15 @@
 }
 
 .confirmed {
-  background-color: #34495e;
+  background-color: #586BA4;
   font-size: 1.6rem;
   color: white;
   text-align: center;
+  margin: 0 3.5rem 0 3.5rem;
+  border-radius: 25px;  
+  box-shadow: 0 8px 32px 0 rgba( 88, 107, 164, 0.37 );
+  backdrop-filter: blur( 5.0px );
+  -webkit-backdrop-filter: blur( 5.0px );
 }
 
 .state-count {
@@ -47,10 +55,16 @@
   margin-top: 0.4rem;
   text-align: center;
   color: white;
+  margin: 1.2rem;
+  border-radius: 25px;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 5.0px );
+  -webkit-backdrop-filter: blur( 5.0px );
 }
 
 .updated {
   text-align: center;
-  color: #2c3e50;
-  margin-bottom: 1rem;
+  background-color: #586BA4;
+  color: white;
+  padding: 1rem 0 1rem 0;
 }
