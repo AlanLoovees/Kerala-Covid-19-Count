@@ -77,11 +77,11 @@ class Main extends React.Component {
 
     componentDidMount() {
 
-        fetch("http://localhost:3000/fetchStateWise")
+        fetch("https://kcc-server.herokuapp.com/fetchStateWise")
         .then(response => response.json())
         .then(data => this.setState({ stateCount: data }))
         .then(() => {
-            fetch("http://localhost:3000/fetchDistrictWise")
+            fetch("https://kcc-server.herokuapp.com/fetchDistrictWise")
             .then(res => res.json())
             .then(data => this.setState({ districtCount: data}));
         });
