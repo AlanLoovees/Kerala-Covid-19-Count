@@ -6,23 +6,22 @@ function RenderDistrict({ districtCount }) {
     if(districtCount != null) {
         var districts = ['ALP', 'EKM', 'IDK', 'KNR', 'KGD', 'KLM', 'KTM', 'KZD', 'MLP', 'PKD', 'PTM', 'TVM', 'TSR', 'WYD']
         var i = 0, color = '#27ae60', shadow = '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )';
-        return Object.keys(districtCount).map((district) => {
-            if (district === "Other State") return null;
+        return Object.values(districtCount).map((data) => {
+            if (data[0] === "Date") return null;
             else {
-                var delta = districtCount[district].delta.confirmed;
-                if (delta>900) {
+                if (data[1]>900) {
                     color = '#c0392b';
                     shadow = '0 8px 32px 0 rgba( 192, 57, 43, 0.37 )';
                 }
-                else if (delta>600) {
+                else if (data[1]>600) {
                     color = '#d35400';
                     shadow = '0 8px 32px 0 rgba( 211, 84, 0, 0.37 )';
                 }
-                else if (delta>250) {
+                else if (data[1]>250) {
                     color = '#f39c12';
                     shadow = '0 8px 32px 0 rgba( 243, 156, 18, 0.37 )';
                 }
-                else if (delta>100) {
+                else if (data[1]>100) {
                     color = '#f1c40f';
                     shadow = '0 8px 32px 0 rgba( 241, 196, 15, 0.37 )';
                 }
@@ -31,13 +30,13 @@ function RenderDistrict({ districtCount }) {
                     shadow = '0 8px 32px 0 rgba( 39, 174, 96, 0.37 )';
                 }
                 return (
-                    <div className="col s6 l2" key={district}>
+                    <div className="col s6 l2" key={data[0]}>
                         <Card
                             className="state-count"
                             style={{ backgroundColor: color, boxShadow: shadow }}
                         >
                             <div className="card-title">{districts[i++]}</div>
-                            <div>{delta}</div>
+                            <div>{data[1]}</div>
                         </Card>
                     </div>
                 );
@@ -45,8 +44,24 @@ function RenderDistrict({ districtCount }) {
         })
     }
     else {
-        return <div>Loading...</div>;
+        return <div className="center">Loading...</div>;
     }
+}
+
+function RenderDate({ districtCount }) {
+    if(districtCount!= null) {
+        return Object.values(districtCount).map((data) => {
+            if (data[0] === "Date") {
+                return (
+                    <div className="updated" key={data[0]}>
+                    Last Updated:{" "}{data[1]}
+                    </div>
+                )
+            }
+            else return null;
+        })
+    }
+    else return null
 }
 
 class Main extends React.Component {
@@ -62,11 +77,11 @@ class Main extends React.Component {
 
     componentDidMount() {
 
-        fetch("https://kcc-server.herokuapp.com/fetchStateWise")
+        fetch("http://localhost:3000/fetchStateWise")
         .then(response => response.json())
         .then(data => this.setState({ stateCount: data }))
         .then(() => {
-            fetch("https://kcc-server.herokuapp.com/fetchDistrictWise")
+            fetch("http://localhost:3000/fetchDistrictWise")
             .then(res => res.json())
             .then(data => this.setState({ districtCount: data}));
         });
@@ -85,7 +100,7 @@ class Main extends React.Component {
                             <div className="count">
                                 {JSON.stringify(
                                     this.state.stateCount
-                                        ? +this.state.stateCount.deltaconfirmed
+                                        ? +this.state.stateCount
                                         : 0
                                 )}
                             </div>
@@ -100,13 +115,9 @@ class Main extends React.Component {
                         />
                     </div>
                 </div>
-                <div className="updated">
-                    Last Updated:{" "}
-                    {JSON.stringify(
-                        this.state.stateCount
-                            ? this.state.stateCount.lastupdatedtime
-                            : 0
-                    )}
+                <div>
+                    <RenderDate districtCount={this.state.districtCount}
+                    />
                 </div>
             </div>
         );
